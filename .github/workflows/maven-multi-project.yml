@@ -53,4 +53,9 @@ jobs:
           java-version: '17'
       - name: Build and test with Maven
         working-directory: ${{ matrix.project }}
-        run: mvn clean install 
+        run: |
+          if [ -f pom.xml ]; then
+            mvn clean install
+          else
+            echo "No pom.xml found in ${{ matrix.project }}, skipping..."
+          fi 
