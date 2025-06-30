@@ -1,0 +1,56 @@
+name: Build and Test All Maven Projects
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - project-01-hello-world
+          - project-02-simple-calculator
+          - project-03-project-info
+          - project-04-unit-converter
+          - project-05-mini-quiz
+          - project-06-simple-calculator
+          - project-07-file-writer
+          - project-07-note-saver
+          - project-08-number-guess
+          - project-09-unit-converter
+          - project-10-password-generator
+          - project-11-currency-converter
+          - project-12-stopwatch
+          - project-13-bmi-calculator
+          - project-14-loan-emi-calculator
+          - project-15-password-generator
+          - project-16-leap-year-checker
+          - project-17-email-validator
+          - project-18-palindrome-checker
+          - project-19-prime-checker
+          - project-20-password-strength-checker
+          - project-21-temperature-converter
+          - project-22-interest-calculator
+          - project-23-word-counter
+          - project-24-leap-year-checker
+          - project-25-number-to-words
+          - project-26-palindrome-checker
+          - project-27-temperature-converter
+          - project-28-age-calculator
+          - project-29-prime-checker
+          - project-30-word-counter
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build and test with Maven
+        working-directory: ${{ matrix.project }}
+        run: mvn clean install 
